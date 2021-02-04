@@ -22,12 +22,12 @@ def load_messages(path):
     return sentences_ids[:15], sentences[:15]
 
 
-def train_fn(epoch, nb_epochs, model, dataloader, loss_fn, optimizer, print_step=500, device=None):
+def train_fn(epoch, nb_epochs, model, dataloader, loss_fn, optimizer, print_step=50, device=None):
     model.train()
     running_loss = 0.0
         
     for i, batch in enumerate(dataloader):
-        if i == 4000:
+        if i == 400:
             break
         input_texts, labels = batch
         input_texts, labels = input_texts.long().to(device), labels.long().to(device)
@@ -60,7 +60,7 @@ def eval_fn(model, batch_size, dataloader, loss_fn, device=None):
         
     with torch.no_grad():
         for i, batch in enumerate(dataloader):
-            if i == 500:
+            if i == 50:
                 break
             input_texts, labels = batch
             input_texts, labels = input_texts.long().to(device), labels.long().to(device)
@@ -78,8 +78,8 @@ def eval_fn(model, batch_size, dataloader, loss_fn, device=None):
             labels = labels.detach().cpu().numpy()
             good_preds = (np.sum(preds == labels))
             val_acc += good_preds
-        val_acc = 100 * val_acc / (batch_size*500)#len(dataloader)               
-        current_val_loss = val_loss / 500#len(dataloader)
+        val_acc = 100 * val_acc / (batch_size*50)#len(dataloader)               
+        current_val_loss = val_loss / 50#len(dataloader)
         print("Validation --> Loss: {}  Accuracy {} %".format(round(current_val_loss, 6), round(val_acc, 2)))
         return current_val_loss
     
