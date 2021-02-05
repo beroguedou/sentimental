@@ -2,7 +2,7 @@
 
 Sentimental is a project which allows to train a french sentimental analysis model based on CamemBert which is a french pre-trained transformer. The data used in this project is "Allociné" reviews so the model is well suited for movies sentiment analysis.
 
-## Launch a training
+## 1- Launch a training
 
 First of all you should create a directory with the name "saved" when the training function will save the future trained model. 
 ```bash
@@ -16,7 +16,7 @@ And then you could run a training by running the following bash command:
 python train.py --epochs 30 --batch 3 --workers 5 --stopping 5 --device 'cuda:0' --name "sentimental_camembert_model.pth"
 ```
 
-## Serve a prediction
+## 2- Serve a prediction
 
 To serve prediction we made a basic flask application that is connected to a model trained (model should be in the directory "saved").
 ```bash
