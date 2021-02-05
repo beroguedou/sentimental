@@ -2,11 +2,20 @@
 
 Sentimental is a project which allows to train a french sentimental analysis model based on CamemBert which is a french pre-trained transformer. The data used in this project is "Allociné" reviews so the model is well suited for movies sentiment analysis.
 
+## 0- Clone the repository
+```bash
+git clone https://github.com/beroguedou/sentimental.git
+```
+
 ## 1- Launch a training
+
+Move in the cloned repository
+```bash
+cd sentimental
+```
 
 First of all you should create a directory with the name "saved" when the training function will save the future trained model. 
 ```bash
-cd sentimental
 mkdir saved
 ```
 
