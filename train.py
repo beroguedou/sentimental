@@ -67,7 +67,7 @@ optimizer_parameters = [
 
 # Optimizer and criterion
 optimizer = torch.optim.AdamW(params=optimizer_parameters, lr=1e-5)
-loss_fn = torch.nn.CrossEntropyLoss()
+loss_fn = torch.nn.CrossEntropyLoss(ignore_index=1)
 
 # Training loop !
 count = 0
