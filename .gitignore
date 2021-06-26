@@ -1,1 +1,5 @@
 core
+saved
+logs
+__pycache__
+model_store

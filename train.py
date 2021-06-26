@@ -6,6 +6,7 @@ import argparse
 import numpy as np
 import pandas as pd
 from config import *
+from model_arch import SentimentalModel
 from datetime import date
 from data import SentimentalDataset, SentimentalDataLoader
 from utils import train_fn, eval_fn
@@ -54,8 +55,8 @@ val_dataloader = SentimentalDataLoader(val_dataset,
                                              shuffle=False,
                                              num_workers=num_workers)
 
-
-model.train().to(device)
+model = SentimentalModel()
+model.to(device)
 # We don't want to lose quickly the pretrained weights so we put some part of the model to decay
 parameters = list(model.named_parameters())
 no_decay = ['classifier.dense.weight', 'classifier.dense.bias', 'bias', 'LayerNorm.bias', 'LayerNorm.weight',

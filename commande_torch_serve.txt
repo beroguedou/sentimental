@@ -1,0 +1,23 @@
+torch-model-archiver --model-name sentimental --version 1.0 --model-file model_arch.py --serialized-file ./saved/sentimental_camembert_model.pth --export-path model_store --handler model_handler.py
+
+
+=========================================
+torchserve --start --ncs --model-store model_store --models sentimental.mar
+===========================================================
+
+curl -X POST http://127.0.0.1:8080/predictions/sentimental -T ./model_input/sample1.txt
+
+
+===================================
+register:
+
+curl -X POST "localhost:8081/models?model_name=sentimental&url=sentimental.mar&batch_size=4&max_batch_delay=5000&initial_workers=3&synchronous=true"
+
+==========================================
+inspection
+
+curl http://localhost:8081/models/sentimental
+
+===================================================
+
+curl -X POST http://127.0.0.1:8080/predictions/sentimental -T ./model_input/sample1.txt & curl -X POST http://127.0.0.1:8080/predictions/sentimental -T ./model_input/sample2.txt
