@@ -6,6 +6,7 @@ import json
 import os
 import re
 import logging
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -93,6 +94,13 @@ class SentimentalHandler(BaseHandler):
         :param context: Initial context contains model server system properties.
         :return: prediction output
         """
+        start_time = time.time()
+        
         model_input, raw_data = self.preprocess(data)
         categories, probas = self.inference(model_input)
+        
+        stop_time = time.time()
+        duration = round((stop_time - start_time) * 1000, 2)
+        context.metrics.add_time('HandlerTime', duration, None, 'ms')
+        context.metrics.add_time('MeanTimePerRequest', duration / len(data), None, 'ms')
         return self.postprocess(categories, raw_data, probas)
